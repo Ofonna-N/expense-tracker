@@ -6,6 +6,7 @@ const ExpenseTable = () => {
     <div className="grid grid-cols-4 ">
       <ExpenseTableTitle />
       <ExpenseItem />
+      <ExpenseItem />
     </div>
   );
 };
