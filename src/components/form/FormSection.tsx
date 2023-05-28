@@ -1,9 +1,8 @@
-import React from "react";
-import InputSection from "./inputSection";
+import InputSection from "./InputSection";
 
 const FormSection = () => {
   return (
-    <form className=" px-[4rem] py-[3rem] flex flex-col gap-[1rem]">
+    <form className="py-[3rem] flex flex-col gap-[1rem]">
       <InputSection>
         <label className="font-bold" htmlFor="description">
           Description
