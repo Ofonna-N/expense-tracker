@@ -3,11 +3,24 @@ import InputSection from "./InputSection";
 import { Expense } from "../../customTypes/CustomTypes";
 import useExpenseContext from "../../customhooks/useExpenseContext";
 import { v4 as uuidv4 } from "uuid";
+import Joi from "joi";
+import { joiResolver } from "@hookform/resolvers/joi";
+
+const schema = Joi.object({
+  description: Joi.string().min(3).required(),
+  amount: Joi.number().min(0).required(),
+  category: Joi.string(),
+});
 
 const FormSection = () => {
-  const { register, handleSubmit } = useForm<Expense>();
-  const expenseCtx = useExpenseContext();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Expense>({ resolver: joiResolver(schema) });
 
+  const expenseCtx = useExpenseContext();
+  // console.log(errors);
   const onSubmit: SubmitHandler<Expense> = (data) => {
     data.id = uuidv4();
     expenseCtx.addExpense(data);
@@ -28,9 +41,12 @@ const FormSection = () => {
           className="form-txt-input"
           type="text"
           id="description"
-          {...register("description", { required: true })}
+          {...register("description", { required: true, min: 3 })}
           placeholder="description"
         />
+        <p className="text-red-500 text-[1.3rem]">
+          {errors.description?.message}
+        </p>
       </InputSection>
       <InputSection>
         <label className="font-bold" htmlFor="amount">
@@ -40,10 +56,11 @@ const FormSection = () => {
           className="form-txt-input"
           type="number"
           id="amount"
-          step={0.1}
-          {...register("amount", { required: true })}
+          step={0.01}
+          {...register("amount", { required: true, min: 0 })}
           placeholder="amount"
         />
+        <p className="text-red-500 text-[1.3rem]">{errors.amount?.message}</p>
       </InputSection>
       <InputSection>
         <label className="font-bold" htmlFor="category">
