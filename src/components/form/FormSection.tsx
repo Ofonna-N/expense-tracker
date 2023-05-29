@@ -2,12 +2,18 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import InputSection from "./InputSection";
 import { Expense } from "../../customTypes/CustomTypes";
 import useExpenseContext from "../../customhooks/useExpenseContext";
+import { v4 as uuidv4 } from "uuid";
 
 const FormSection = () => {
   const { register, handleSubmit } = useForm<Expense>();
-  const onSubmit: SubmitHandler<Expense> = (data) => console.log(data);
-
   const expenseCtx = useExpenseContext();
+
+  const onSubmit: SubmitHandler<Expense> = (data) => {
+    data.id = uuidv4();
+    expenseCtx.addExpense(data);
+    // console.log(data);
+    // console.log(expenseCtx);
+  };
 
   return (
     <form
@@ -22,7 +28,7 @@ const FormSection = () => {
           className="form-txt-input"
           type="text"
           id="description"
-          {...register("description")}
+          {...register("description", { required: true })}
           placeholder="description"
         />
       </InputSection>
@@ -34,7 +40,8 @@ const FormSection = () => {
           className="form-txt-input"
           type="number"
           id="amount"
-          {...register("amount")}
+          step={0.1}
+          {...register("amount", { required: true })}
           placeholder="amount"
         />
       </InputSection>
@@ -54,7 +61,7 @@ const FormSection = () => {
         </select>
       </InputSection>
       <InputSection>
-        <button className="bg-blue-600 py-[1rem] rounded-[5px] text-[1.8rem] text-white">
+        <button className="bg-blue-600 py-[1rem] rounded-[5px] text-[1.8rem] text-white hover:bg-blue-700">
           Submit
         </button>
       </InputSection>

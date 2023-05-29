@@ -5,6 +5,7 @@ const Context = createContext<ExpenseContext>({
   expenses: [],
   addExpense: () => {},
   deleteExpense: () => {},
+  setFilter() {},
 });
 
 export default Context;

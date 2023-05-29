@@ -1,4 +1,5 @@
 export type Expense = {
+  id: string;
   description: string;
   amount: number;
   category: string;
@@ -6,6 +7,7 @@ export type Expense = {
 
 export type ExpenseContext = {
   expenses: Expense[];
-  addExpense: () => void;
-  deleteExpense: () => void;
+  addExpense: (item: Expense) => void;
+  deleteExpense: (id: string) => void;
+  setFilter: (filter: string) => void;
 };
