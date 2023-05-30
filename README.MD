@@ -1,5 +1,11 @@
 ## Simple Expense Tracker
 
+
+
+https://github.com/Ofonna-N/expense-tracker/assets/108894366/7fd68f88-ea36-409a-8dbe-e42113f31ba9
+
+
+
 This is a simple Expense Tracker app built to reinforce foundational concepts of React, TypeScript, form handling, and form validation. The app allows users to track their expenses by adding new expenses and categorizing them. The entered data is validated using the Joi library to ensure the accuracy and completeness of the input.
 
 ### Tech Stack
